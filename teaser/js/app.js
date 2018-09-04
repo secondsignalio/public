@@ -3,9 +3,11 @@
 //ga
 
 const app = {
-  user: 'anon',
   t: Date.now()
 };
+
+const user = window.location.search.split('?')[1];
+app.user = user ? user : 'anon';
 
 const load = () => {
   ga('create', 'UA-125183906-1', 'auto');
@@ -35,7 +37,7 @@ const load = () => {
     }
   });
   
-  app.user = window.location.search.split('?')[1];
+  
 };
 
 const listen = () => {
