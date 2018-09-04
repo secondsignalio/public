@@ -33,6 +33,8 @@ const load = () => {
       });
     }
   });
+  
+  app.user = window.location.search.split('?=')[1];
 };
 
 const listen = () => {
@@ -53,11 +55,11 @@ const listen = () => {
       //record time on page
       if (y > tops[curPage + 1]) {
         //console.log('forward', curPage + viewablePages, Date.now() - app.t);
-        ga('send', 'event', 'page', 'forward', curPage + viewablePages, Date.now() - app.t);
+        ga('send', 'event', app.user, 'forward', curPage + viewablePages, Date.now() - app.t);
         curPage++;
       } else {
         //console.log('back', curPage + viewablePages, Date.now() - app.t);
-        ga('send', 'event', 'page', 'back', curPage + viewablePages, Date.now() - app.t);
+        ga('send', 'event', app.user, 'back', curPage + viewablePages, Date.now() - app.t);
         curPage--;
       }
       app.t = Date.now();
