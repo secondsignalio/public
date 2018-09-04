@@ -34,7 +34,7 @@ const load = () => {
     }
   });
   
-  app.user = window.location.search.split('?=')[1];
+  app.user = window.location.search.split('?')[1];
 };
 
 const listen = () => {
