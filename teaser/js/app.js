@@ -3,6 +3,7 @@
 //ga
 
 const app = {
+  user: 'anon',
   t: Date.now()
 };
 
