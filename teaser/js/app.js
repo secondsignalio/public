@@ -12,7 +12,7 @@ const load = () => {
 
   //render
   pdfjsLib.getDocument('./teaser.pdf').then((pdf) => {
-    const scale = 8, goal = pdf.numPages;
+    const scale = 4, goal = pdf.numPages;
     let processed = 1;
     for (let i = 0; i < pdf.numPages; i++) {
       const pageNum = i + 1;
