@@ -10,8 +10,10 @@ const user = window.location.search.split('?')[1];
 app.user = user ? user : 'anon';
 
 const load = () => {
-  ga('create', 'UA-125183906-1', 'auto');
-  ga('send', 'pageview');
+  try {
+    ga('create', 'UA-125183906-1', 'auto');
+    ga('send', 'pageview');
+  } catch (e) {}
 
   //render
   pdfjsLib.getDocument('./teaser.pdf').then((pdf) => {
@@ -58,11 +60,15 @@ const listen = () => {
       //record time on page
       if (y > tops[curPage + 1]) {
         //console.log('forward', curPage + viewablePages, Date.now() - app.t);
-        ga('send', 'event', app.user, 'forward', curPage + viewablePages, Date.now() - app.t);
+        try {
+          ga('send', 'event', app.user, 'forward', curPage + viewablePages, Date.now() - app.t);
+        } catch (e) {}
         curPage++;
       } else {
         //console.log('back', curPage + viewablePages, Date.now() - app.t);
-        ga('send', 'event', app.user, 'back', curPage + viewablePages, Date.now() - app.t);
+        try {
+          ga('send', 'event', app.user, 'back', curPage + viewablePages, Date.now() - app.t);
+        } catch (e) {}
         curPage--;
       }
       app.t = Date.now();

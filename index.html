@@ -56,8 +56,10 @@
     
     <script src="/teaser/js/ga.js"></script>
     <script>
-      ga('create', 'UA-125183906-1', 'auto');
-      ga('send', 'pageview');
+      try {
+        ga('create', 'UA-125183906-1', 'auto');
+        ga('send', 'pageview');
+      } catch (e) {}
     </script>
 
   </body>
