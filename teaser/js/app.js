@@ -55,6 +55,9 @@ const listen = () => {
     const y = window.scrollY + window.innerHeight / 4;
     if (y > tops[curPage] && y < tops[curPage + 1]) {
     } else {
+      try {
+        ga('send', 'pageview', '/page-' + (curPage + viewablePages) + '-' + app.user);
+      } catch (e) {}
       if (y > tops[curPage + 1]) {
         try {
           ga('send', 'event', app.user, 'forward', curPage + viewablePages, Date.now() - app.t);
