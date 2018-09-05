@@ -10,11 +10,6 @@ const user = window.location.search.split('?')[1];
 app.user = user ? user : 'anon';
 
 const load = () => {
-  try {
-    ga('create', 'UA-125183906-1', 'auto');
-    ga('send', 'pageview');
-  } catch (e) {}
-
   //render
   pdfjsLib.getDocument('./teaser.pdf').then((pdf) => {
     const scale = 4, goal = pdf.numPages;
@@ -38,12 +33,16 @@ const load = () => {
       });
     }
   });
-  
-  
+  //ga
+  try {
+    ga('create', 'UA-125183906-1', 'auto');
+    ga('send', 'pageview');
+  } catch (e) {}
+  //resize listener
+  window.onresize = listen;
 };
 
 const listen = () => {
-  console.log('setting listeners');
   const tops = [];
   for (let i = 0; i < app.pdf.numPages; i++) {
     tops.push(document.getElementById('page-' + (i + 1)).getBoundingClientRect().top);
@@ -55,17 +54,13 @@ const listen = () => {
   window.onscroll = () => {
     const y = window.scrollY + window.innerHeight / 4;
     if (y > tops[curPage] && y < tops[curPage + 1]) {
-      //do nothing
     } else {
-      //record time on page
       if (y > tops[curPage + 1]) {
-        //console.log('forward', curPage + viewablePages, Date.now() - app.t);
         try {
           ga('send', 'event', app.user, 'forward', curPage + viewablePages, Date.now() - app.t);
         } catch (e) {}
         curPage++;
       } else {
-        //console.log('back', curPage + viewablePages, Date.now() - app.t);
         try {
           ga('send', 'event', app.user, 'back', curPage + viewablePages, Date.now() - app.t);
         } catch (e) {}
@@ -76,5 +71,4 @@ const listen = () => {
   };
 };
 
-window.onload = load;
-window.onresize = listen;
+window.onload = setTimeout(load, 100);
