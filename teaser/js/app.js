@@ -71,4 +71,4 @@ const listen = () => {
   };
 };
 
-window.onload = setTimeout(load, 100);
+window.onload = setTimeout(load, 1);
