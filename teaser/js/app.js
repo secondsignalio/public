@@ -29,6 +29,7 @@ const load = () => {
         });
         processed++;
         app.pdf = pdf;
+        if (processed === 2) document.getElementById('loader').style.display = 'none';
         if (processed === goal) setTimeout(() => listen(), 250);
       });
     }
